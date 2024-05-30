@@ -1,38 +1,45 @@
 pipeline {
-    agent any
     
     environment {
-        AWS_ACCESS_KEY_ID     = credentials ('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_KEY')
     }
+
+   pipeline {
+    agent any
     
     stages {
-        stage('Checkout') {
+        stage ("checkout from GIT") {
             steps {
-                // Checkout your Terraform code repository
-                git 'https://github.com/shkr04041996/terraformcode_ecs.git'
+                git branch: 'main', url: 'https://github.com/rahuls512/AWS-CICD-with-Jenkins-Terraform-Webhook-GroovyScripts.git'
+               
             }
         }
-        
-        stage('Terraform Init') {
+        stage ("terraform init") {
             steps {
-                // Initialize Terraform
                 sh 'terraform init'
             }
         }
-        
-        stage('Terraform Plan') {
+        stage ("terraform fmt") {
             steps {
-                // Generate Terraform plan
-                sh 'terraform plan -out=tfplan'
+                sh 'terraform fmt'
             }
         }
-        
-        stage('Terraform Apply') {
+        stage ("terraform validate") {
             steps {
-                // Apply Terraform changes
-                sh 'terraform apply -auto-approve tfplan'
+                sh 'terraform validate'
             }
         }
-    }
-}
+        stage ("terrafrom plan") {
+            steps {
+                sh 'terraform plan '
+            }
+        }
+        stage ("terraform apply") {
+            steps {
+                sh 'terraform apply --auto-approve'
+            }
+        }
+     }
+   }
+}    
