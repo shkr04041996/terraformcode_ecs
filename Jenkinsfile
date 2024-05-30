@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ("checkout from GIT") {
             steps {
-                git branch: 'main', url: 'https://github.com/rahuls512/AWS-CICD-with-Jenkins-Terraform-Webhook-GroovyScripts.git'
+                git branch: 'main', url: 'https://github.com/shkr04041996/terraformcode_ecs.git'
             }
         }
         stage ("terraform init") {
