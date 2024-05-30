@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your Terraform code repository
-                git 'https://github.com/your-terraform-repo.git'
+                git 'https://github.com/shkr04041996/terraformcode_ecs.git'
             }
         }
         
