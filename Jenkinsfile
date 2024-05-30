@@ -5,7 +5,6 @@ pipeline {
         stage ("checkout from GIT") {
             steps {
                 git branch: 'main', url: 'https://github.com/rahuls512/AWS-CICD-with-Jenkins-Terraform-Webhook-GroovyScripts.git'
-               
             }
         }
         stage ("terraform init") {
@@ -33,6 +32,5 @@ pipeline {
                 sh 'terraform apply --auto-approve'
             }
         }
-     }
-   }
-}    
+    }
+}
